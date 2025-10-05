@@ -1,76 +1,72 @@
 #  Netflix Quarterly Revenue Forecasting (Time Series Project)
 
 ##  Overview
-I developed a **time-series forecasting model** to predict Netflix’s quarterly global revenue using both historical data and regional business drivers (memberships and ARPU).  
-The goal was to analyze Netflix’s revenue trend, model its seasonality, and forecast future growth.
-
-I implemented **ARIMA** and **SARIMAX (ARIMA with Exogenous Variables)** models, evaluated performance with RMSE, and extended the forecast 8 quarters into the future.  
-This project demonstrates the end-to-end workflow of **data cleaning → model building → evaluation → visualization**.
+I developed a **time-series forecasting model** to predict Netflix’s quarterly global revenue using both historical data and regional business drivers such as memberships and ARPU.  
+I applied **ARIMA** and **SARIMAX (ARIMA with Exogenous Variables)** models to capture trend, quarterly seasonality, and external business dynamics.  
+The model forecasts Netflix’s future revenue trajectory and quantifies prediction uncertainty through confidence intervals.
 
 ---
 
 ##  Objectives
-- Analyze quarterly Netflix revenue trends (2019–2024)
-- Build a baseline **ARIMA(1,1,1)** model for pure trend forecasting
-- Improve predictions using **SARIMAX** with membership and ARPU features
-- Forecast **8 future quarters (2024–2026)** with uncertainty bands
-- Visualize and compare model performance
+- Analyze quarterly Netflix revenue trends from 2019–2024  
+- Build a baseline **ARIMA (1,1,1)** model for pure trend forecasting  
+- Improve accuracy with **SARIMAX (1,1,1)** by adding membership and ARPU features  
+- Forecast **8 future quarters (2024–2026)** with uncertainty bands  
+- Visualize and compare model performance  
 
 ---
 
 ##  Methodology
-### 1. Data Preparation
-- Cleaned and formatted Netflix quarterly data
-- Converted all numeric fields (revenue, members, ARPU)
-- Created lag and growth rate features
-- Split dataset into 80% training and 20% test periods
+###  Data Preparation
+- Cleaned and formatted quarterly Netflix revenue and membership data  
+- Parsed `Date`, converted all numeric columns, handled `$` and commas  
+- Created lag and growth-rate features for additional signal  
+- Split dataset chronologically (80 % train / 20 % test)
 
-### 2. Modeling
-- **ARIMA(1,1,1)** trained on historical revenue
-- **SARIMAX(1,1,1)** trained with regional membership and ARPU
-- Forecast accuracy measured via RMSE
+###  Modeling
+- **ARIMA (1,1,1)** baseline for trend and noise components  
+- **SARIMAX (1,1,1)** with exogenous regressors (Members + ARPU)  
+- Evaluated forecast accuracy with **RMSE**
 
-### 3. Evaluation
-| Model | RMSE (USD) | Notes |
-|--------|-------------|-------|
-| ARIMA(1,1,1) | ≈ $661M | Baseline model |
-| SARIMAX(1,1,1) | ≈ $560M | Improved using exogenous data |
+###  Evaluation
+| Model             | RMSE (USD)     | Notes                              |
+|-------------------|----------------|------------------------------------|
+| ARIMA (1,1,1)     | $661,203,989   | Baseline (trend only)              |
+| SARIMAX (1,1,1)   | $146,971,322   | Members + ARPU exogenous features  |
 
-### 4. Extended Forecast
-- Forecasted 8 future quarters (2024–2026)
-- Added realistic business-driven variation (memberships, ARPU)
-- Displayed 95% confidence intervals
+**Improvement:** SARIMAX reduced error by **≈77.8%** compared to ARIMA.
+
+###  Extended Forecast
+- Forecasted 8 future quarters (2024–2026)  
+- Extrapolated membership + ARPU growth using recent trends + mild quarterly variation  
+- Added 95 % confidence intervals  
 
 ---
 
-##  Results & Visualization
-
+##  Results & Insights
 ![Netflix Forecast](images/forecast_plot.png)
 
-**Legend:**
+**Legend**
 - **Gray:** Training Data  
 - **Blue:** Actual Validation Revenue  
 - **Red Dashed:** SARIMAX Forecast  
-- **Orange Dashed:** Extended Forecast (8 Future Quarters)  
-- **Shaded Areas:** 95% Confidence Intervals  
+- **Orange Dashed:** Extended Forecast (8 Quarters Ahead)  
+- **Shaded Areas:** 95 % Confidence Intervals  
 
-**Key Insights:**
-- SARIMAX effectively captured growth driven by membership and ARPU changes.  
-- Forecast indicates continued revenue growth, potentially reaching **$10–11B per quarter by 2026**.  
-- Confidence intervals widen slightly, reflecting natural uncertainty.
+**Highlights**
+- SARIMAX with business drivers cut RMSE from ≈\$661M to ≈\$147M (−77.8%).  
+- The forecast projects continued growth toward ≈\$10–11B per quarter by 2026.  
+- Confidence intervals expand slightly over time, reflecting natural forecast uncertainty.
 
 ---
 
 ##  Tech Stack
 | Category | Tools |
 |-----------|--------|
-| Language | Python |
+| Language | Python 3 |
 | Libraries | Pandas, NumPy, Statsmodels, Scikit-learn, Matplotlib |
-| Modeling | ARIMA, SARIMAX |
+| Models | ARIMA, SARIMAX |
 | Evaluation | RMSE |
 | Visualization | Matplotlib, Seaborn |
 
----
-
-## 📂 Repository Structure
 
