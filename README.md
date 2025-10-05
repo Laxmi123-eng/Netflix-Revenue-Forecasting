@@ -44,7 +44,6 @@ The model forecasts Netflix’s future revenue trajectory and quantifies predict
 ---
 
 ##  Results & Insights
-![Netflix Forecast](images/forecast_plot.png)
 
 **Legend**
 - **Gray:** Training Data  
